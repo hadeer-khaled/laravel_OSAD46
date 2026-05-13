@@ -35,3 +35,5 @@ php artisan migrate
 --------------------------------------------
 php artisan make:controller PostController
 php artisan make:controller PostController --resource
+-------------------------------------------------
+{{}} vs {{!! !!}}

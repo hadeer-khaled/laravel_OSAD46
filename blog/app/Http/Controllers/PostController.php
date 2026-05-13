@@ -24,7 +24,7 @@ class PostController extends Controller
 
     public function create()
     {
-        //store data in database
+        return view('posts.create');        
     }
 
     /**
@@ -33,12 +33,13 @@ class PostController extends Controller
     public function store(Request $request)
     {
         //store data in database
+        return 'Post created successfully with title: ' . $request->input('title') . ' and content: ' . $request->input('content');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(int $id)
     {
         // get details of one post
         $posts = [

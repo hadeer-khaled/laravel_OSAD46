@@ -9,7 +9,7 @@
         @foreach ($posts as $post)
             <li>--------------------------</li>
             <li>Post Title: {{$post['title']}}</li>
-            <a href="/posts/{{$post['id']}}">View Post</a>
+            <a href="/posts/{{$post['id']}}">View Post</a> 
         @endforeach
     </ul>
 
