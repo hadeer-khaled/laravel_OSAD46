@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 // Route::get('/test', function () {
@@ -31,5 +32,7 @@ Route::post('/posts' , [PostController::class , 'store'])->name('posts.store');
 //     Route::get('/create' , [PostController::class , 'create'])->name('admin.posts.create');
 //     Route::post('' , [PostController::class , 'store'])->name('admin.posts.store');
 // });
+
+Route::resource('users', UserController::class);
 
 // Route::resource('posts', PostController::class);

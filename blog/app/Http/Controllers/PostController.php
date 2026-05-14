@@ -74,12 +74,15 @@ class PostController extends Controller
     {
 
         // Way 1 - Query Builder
-        $post = DB::table('posts')->where('id', $id)->first();  // return single post (object)
+        // $post = DB::table('posts')->where('id', $id)->first();  // return single post (object)
         // $post = DB::table('posts')->find($id);  // return single post (object)
 
+        // Way 2 - ORM (Eloquent)
+        $post = Post::with('author')->find($id);  // return single post (object)
         if(!$post) {
             return 'Post not found';
         }
+        // return $post;
         
         return view('posts.show', ['post' => $post] );
 
