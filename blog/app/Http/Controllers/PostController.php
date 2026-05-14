@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PostController extends Controller
 {
@@ -11,13 +13,13 @@ class PostController extends Controller
      */
     public function index()
     {
-        // get all posts from database
-        $posts = [
-            ['id' => 1, 'title' => 'First Post', 'content' => 'This is the first post.'],
-            ['id' => 2, 'title' => 'Second Post', 'content' => 'This is the second post.'],
-            ['id' => 3, 'title' => 'Third Post', 'content' => 'This is the third post.'],
-        ];
 
+        // Way 1 - Query Builder
+        $posts = DB::table('posts')->get();  
+        // $posts = DB::table('posts')->latest()->get();  // return collection of posts (objects)
+
+        //ORM (Eloquent)
+        // $posts = Post::all();
         return view('posts.index', ['posts' => $posts] );
         // return view('posts.index', compact('posts') ); //['posts' => $posts]
     }
@@ -33,7 +35,36 @@ class PostController extends Controller
     public function store(Request $request)
     {
         //store data in database
-        return 'Post created successfully with title: ' . $request->input('title') . ' and content: ' . $request->input('content');
+
+        // Way 1 - Query Builder
+        // DB::table('posts')->insert([
+        //     'title' => $request['title'],
+        //     'content' => $request['content'],
+        //     'created_at' => now(),
+        //     'updated_at' => now(),
+        // ]);
+
+
+        //Way 2 - ORM (Eloquent)
+        // $post = new Post();
+        // $post->title = $request['title'];
+        // $post->content = $request['content'];
+        // $post->save();
+
+
+        //Way 3 - ORM Eloquent (Mass Assignment)
+        $post = Post::create([
+            'title' => $request['title'],
+            'content' => $request['content'],
+        ]);
+
+        // add password
+        // $post->password = bcrypt($request['password']);
+        // $post->save();
+
+        return redirect()->route('posts.index')->with('success', 'Post created successfully');
+
+        // return 'Post created successfully with title: ' . $request->input('title') . ' and content: ' . $request->input('content');
     }
 
     /**
@@ -41,20 +72,17 @@ class PostController extends Controller
      */
     public function show(int $id)
     {
-        // get details of one post
-        $posts = [
-            ['id' => 1, 'title' => 'First Post', 'content' => 'This is the first post.'],
-            ['id' => 2, 'title' => 'Second Post', 'content' => 'This is the second post.'],
-            ['id' => 3, 'title' => 'Third Post', 'content' => 'This is the third post.'],
-        ];
 
-        foreach ($posts as $post) {
-            if ($post['id'] == $id) {
-                return view('posts.show', ['post' => $post]);
-            }
+        // Way 1 - Query Builder
+        $post = DB::table('posts')->where('id', $id)->first();  // return single post (object)
+        // $post = DB::table('posts')->find($id);  // return single post (object)
+
+        if(!$post) {
+            return 'Post not found';
         }
+        
+        return view('posts.show', ['post' => $post] );
 
-        return 'Post not found';
     }
 
     /**

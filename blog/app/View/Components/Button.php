@@ -12,7 +12,7 @@ class Button extends Component
     /**
      * Create a new component instance.
      */
-    public function __construct(string $className = null)
+    public function __construct(string $className = '')
     {
         $this->className = $className;
     }
