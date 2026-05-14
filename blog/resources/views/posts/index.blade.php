@@ -1,17 +1,17 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Posts</title>
-</head>
-<body> 
-    <h1> posts </h1>
+@extends('layouts.master')
+
+@section('title', 'Posts List')
+
+@section('content')
+    <h1> Posts List </h1>
     <ul>
-        @foreach ($posts as $post)
-            <li>--------------------------</li>
-            <li>Post Title: {{$post['title']}}</li>
-            <a href="/posts/{{$post['id']}}">View Post</a> 
+        @foreach($posts as $post)
+            <li>
+                {{$post['title']}}
+                <x-button className="btn btn-primary">
+                    Create New Post
+                </x-button>
+            </li>
         @endforeach
     </ul>
-
-</body>      
-</html>
+@endsection

@@ -10,6 +10,5 @@
             <li>Post Title: {{$post['title']}}</li>
             <li>Post Content: {{$post['content']}}</li>
     </ul>
-
 </body>      
 </html>
