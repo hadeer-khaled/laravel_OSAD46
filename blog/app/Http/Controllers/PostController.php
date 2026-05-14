@@ -13,7 +13,6 @@ class PostController extends Controller
      */
     public function index()
     {
-
         // Way 1 - Query Builder
         $posts = DB::table('posts')->get();  
         // $posts = DB::table('posts')->latest()->get();  // return collection of posts (objects)
@@ -26,6 +25,8 @@ class PostController extends Controller
 
     public function create()
     {
+        // Post::factory()->create(); // create a post using factory
+
         return view('posts.create');        
     }
 

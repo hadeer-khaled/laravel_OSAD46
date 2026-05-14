@@ -40,6 +40,7 @@ class UserController extends Controller
     public function show(string $id)
     {
         $user =User::with('posts')->findOrFail($id);
+
         return $user;
     }
 
