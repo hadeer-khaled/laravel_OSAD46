@@ -5,6 +5,7 @@
             <li>Post Title: {{$post->title}}</li>
             <li>Post Content: {{$post->content}}</li>
             <li>Post Author: {{$post->author->name}}</li>
+            <li>Post Created At: {{$post->created_at}}</li>
             <li>Post Imageeee: {{$post->image}}</li>
 
             @if($post->image)

@@ -4,7 +4,10 @@
     <ul>
         @foreach($posts as $post)
             <li>
-                {{$post->title}}
+                Title: {{$post->title}}
+            </li>
+            <li>
+                Created At: {{$post->created_at}}
             </li>
         @endforeach
         <a href="{{ route('posts.create') }}">
