@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePostRequest;
 use App\Models\Post;
+use Dom\Comment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -124,4 +125,19 @@ class PostController extends Controller
         $post->delete();
         return redirect()->route('posts.index')->with('success', 'Post deleted successfully');
     }
+
+    public function addComment(Request $request, Post $post)
+    {
+        $validatedData = $request->validate([
+            'content' => 'required|string',
+        ]);
+
+        $post->comments()->create([
+            'content' => $validatedData['content'],
+        ]);
+
+        return redirect()->route('posts.show', $post)->with('success', 'Comment added successfully');
+    }
+
+
 }

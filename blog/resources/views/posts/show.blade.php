@@ -18,5 +18,21 @@
             </li>
             @endif
     </ul>
+    <div>
+        <h2>Comments:</h2>
+        <ul>
+            @foreach($post->comments as $comment)
+                <li>{{ $comment->content }}</li>
+            @endforeach
+        </ul>
+
+    <form action="{{route('posts.comments.store', $post)}}" method="POST">
+        @csrf
+        <div>
+            <label for="content">Add Comment:</label>
+            <textarea name="content" id="content"></textarea>
+        </div>
+        <button type="submit">Submit Comment</button>
+    </form>
 </body>      
 </html>

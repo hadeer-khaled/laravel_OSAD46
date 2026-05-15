@@ -37,6 +37,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/posts' , [PostController::class , 'store'])->name('posts.store');
     Route::delete('/posts/{post}' , [PostController::class , 'destroy'])->name('posts.destroy');
 
+    Route::post('/posts/{post}/comments' , [PostController::class , 'addComment'])->name('posts.comments.store');
+
     // Route::resource('users', UserController::class);
 
     Route::prefix('users')->group(function () {
