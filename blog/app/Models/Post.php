@@ -27,5 +27,15 @@ class Post extends Model
         return $this->hasMany(Comment::class);
     }
 
+    public function likes()
+    {
+        return $this->morphMany(Like::class, 'likable');
+    }
+
+    public function isLikedBy(User $user)
+    {
+        return $this->likes()->where('user_id', $user->id)->exists();
+    }
+
     
 }

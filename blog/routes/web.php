@@ -38,6 +38,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/posts/{post}' , [PostController::class , 'destroy'])->name('posts.destroy');
 
     Route::post('/posts/{post}/comments' , [PostController::class , 'addComment'])->name('posts.comments.store');
+    Route::post('/posts/{post}/like' , [PostController::class , 'like'])->name('posts.like');
 
     // Route::resource('users', UserController::class);
 

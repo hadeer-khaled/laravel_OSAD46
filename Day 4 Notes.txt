@@ -1,5 +1,5 @@
 1- Image Uploading ✅
-2- Polymorph Relation
+2- Polymorph Relation ✅
 3- Carbon, Mutator and Accessor
 4- queue & jobs
 5- task schedule
@@ -10,6 +10,26 @@ Storage::url()
 Comment table 
 post      comment
 1           m
-1            1
+1           1
 ----------------
 1          m(fk)
+---------------------
+Post: id, title, ...
+Comment: id, content, post_id, ...
+
+
+Without Morph:
+
+post_likes: id, post_id, user_id
+comment_likes: id, comment_id, user_id
+
+WithMorph:
+
+          Likes table:          id (like id),       likeable_type     likeable_id     user_id
+if like post                        1               App\Models\Post       4              5
+if Like comment                     2               App\Models\Comment    6              5
+
+$post->likes()->count();
+    
+
+

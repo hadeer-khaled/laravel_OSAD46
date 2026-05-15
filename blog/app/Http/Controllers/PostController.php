@@ -139,5 +139,18 @@ class PostController extends Controller
         return redirect()->route('posts.show', $post)->with('success', 'Comment added successfully');
     }
 
+    public function like(Post $post)
+    {
+        if($post->isLikedBy(auth()->user()))
+        {
+            $post->likes()->where('user_id', auth()->id())->delete();
+        }else
+        {
+            $post->likes()->create(['user_id' => auth()->id()]);
+
+        }
+        return redirect()->route('posts.show', $post)->with('success', 'Post liked successfully');
+    }
+
 
 }
