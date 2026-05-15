@@ -10,8 +10,13 @@
             <li>Post Title: {{$post->title}}</li>
             <li>Post Content: {{$post->content}}</li>
             <li>Post Author: {{$post->author->name}}</li>
+            <li>Post Imageeee: {{$post->image}}</li>
 
-        
+            @if($post->image)
+            <li>Post Image: 
+                <img src="{{asset('storage/' . $post->image)}}" alt="Post Image" width="200">
+            </li>
+            @endif
     </ul>
 </body>      
 </html>

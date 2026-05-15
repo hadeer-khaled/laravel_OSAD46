@@ -42,24 +42,15 @@ class PostController extends Controller
     public function store(StorePostRequest $request)
     {
 
-        // $validatedArray = $request->validate([
-        //     'title' => 'required|integer|min:5|max:255', //['required' ,'string', 'min:5', 'max:255'],
-        //     'content' => 'required|string|min:10',
-        // ]);
-
-        // Post::create($validatedArray);
-        
-        // Post::create([
-        //     'title' => $validatedArray['title'],
-        //     'content' => $validatedArray['content'],
-        // ]);
-
-        // Post::create($request->only('title', 'content')); 
-
-        //----------------------------------------------------
+        // dd($request->all());
 
         $validatedArray = $request->validated();
-        Post::create($validatedArray); // mass assignment
+
+        if($request->hasFile('image')){
+            $path = $request->file('image')->store('posts', 'public');
+            $validatedArray['image'] = $path;
+        }
+        Post::create($validatedArray); 
 
 
         //------------------------------------------------
@@ -102,25 +93,10 @@ class PostController extends Controller
      */
     public function show(int $id)
     {
-        // Post::find($id)->delete(); // soft delete
 
-        $post = Post::withTrashed()->find($id);
-        // $post->restore();
-        Post::destroy($id); // hard delete
-        return redirect()->route('posts.index')->with('success', 'Post deleted successfully');
-
-        // // Way 1 - Query Builder
-        // // $post = DB::table('posts')->where('id', $id)->first();  // return single post (object)
-        // // $post = DB::table('posts')->find($id);  // return single post (object)
-
-        // // Way 2 - ORM (Eloquent)
-        // $post = Post::with('author')->find($id);  // return single post (object)
-        // if(!$post) {
-        //     return 'Post not found';
-        // }
-        // // return $post;
+        $post = Post::findOrFail($id); // return post if found else throw 404 error
         
-        // return view('posts.show', ['post' => $post] );
+        return view('posts.show', ['post' => $post] );
 
     }
 

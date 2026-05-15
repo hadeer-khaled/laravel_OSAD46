@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Post extends Model
 {
     use HasFactory, SoftDeletes;
-    protected $fillable = ['title', 'content', 'author_id']; //for mass assignment
+    protected $fillable = ['title', 'content', 'author_id', 'image']; //for mass assignment
 
     // protected $guarded = [];
 
