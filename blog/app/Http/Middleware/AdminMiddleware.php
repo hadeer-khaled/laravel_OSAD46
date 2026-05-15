@@ -1,0 +1,25 @@
+<?php
+
+namespace App\Http\Middleware;
+
+use Closure;
+use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
+
+class AdminMiddleware
+{
+    /**
+     * Handle an incoming request.
+     *
+     * @param  Closure(Request): (Response)  $next
+     */
+    public function handle(Request $request, Closure $next): Response
+    {
+        // Auth::user() returns the currently authenticated user. We check if the user is an admin by accessing the is_admin property.
+        if (!auth()->user()->is_admin) {
+            // abort(403, 'Unauthorized action.');
+            return redirect()->route('dashboard')->with('error', 'You do not have permission to access this page.'); 
+        }
+        return $next($request);
+    }
+}

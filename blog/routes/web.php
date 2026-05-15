@@ -36,7 +36,14 @@ Route::middleware('auth')->group(function () {
     Route::get('/posts/create' , [PostController::class , 'create'])->name('posts.create');
     Route::post('/posts' , [PostController::class , 'store'])->name('posts.store');
 
-    Route::resource('users', UserController::class);
+    // Route::resource('users', UserController::class);
+
+    Route::prefix('users')->group(function () {
+        Route::get('/' , [UserController::class , 'index'])->name('users.index')->middleware('admin');
+        Route::get('/{id}' , [UserController::class , 'show'])->name('users.show')->where('id', '[0-9]+');
+        Route::get('/create' , [UserController::class , 'create'])->name('users.create');
+        Route::post('' , [UserController::class , 'store'])->name('users.store');
+    });
 
 });
 
