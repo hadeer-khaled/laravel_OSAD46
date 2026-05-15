@@ -1,0 +1,31 @@
+1- Request Validation and FormRequest ✅
+2- Laravel Breeze
+3- MiddleWare
+
+-------------------
+5- __() magic function
+5-CSRF
+5- soft delete
+6- polymorph
+7- mutator and accessor
+8- tailwind
+9- custome rule
+10- queue and task schedule
+11- migrate:refresh example
+---------------------------------
+Request Validation
+-------------------
+Flow:
+	routes -> middleware -> controller ->Form Request  -> databse (model)
+					   -> View (ui) 
+
+@errors
+@error("title")--> $message
+old helper function 
+
+bail + validations
+https://laravel.com/docs/master/validation#main-content
+https://laravel.com/docs/master/validation#available-validation-rules
+
+php artisan lang:publish
+----------------------------------

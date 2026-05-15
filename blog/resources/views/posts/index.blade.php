@@ -1,14 +1,5 @@
-@extends('layouts.master')
+<x-app-layout>
 
-@section('title', 'Posts List')
-
-@section('content')
-
-@if(session('success'))
-    {{ session('success') }}  
-@endif
- 
- 
     <h1> Posts List </h1>
     <ul>
         @foreach($posts as $post)
@@ -22,4 +13,5 @@
             </x-button>
         </a>
     </ul>
-@endsection
+
+</x-app-layout>

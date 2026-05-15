@@ -1,20 +1,4 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Posts</title>
-</head>
-<body> 
-    <h1> Create Post </h1>
-     @if($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-     @endif
-
+<x-app-layout>
     <form action="/posts" method="POST">
         @csrf
         <label for="title">Title:</label><br>
@@ -30,6 +14,4 @@
         @enderror
         <input type="submit" value="Submit">
     </form>
-
-</body>      
-</html>
+</x-app-layout>
