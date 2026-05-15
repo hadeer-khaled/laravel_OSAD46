@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Jobs\SendWelcomeEmail;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
@@ -36,19 +37,6 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
-        // way 1 (need to add password to $fillable in User model)
-
-        // $user = User::create($validatedData);
-        // $user->password = Hash::make($request->password);
-        // $user->save();
-
-        // way 2 
-        // $user = new User();
-        // $user->name = $request->name;
-        // $user->email = $request->email;
-        // $user->password =  Hash::make($request->password);
-        // $user->save();
-
         // way 3 (using forceFill)
         $user = new User(); 
         $user->forceFill([ //forceFill bypasses the $fillable property in the model
@@ -57,7 +45,8 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
         ])->save();
 
-
+        SendWelcomeEmail::dispatch($user);
+        
         event(new Registered($user));
 
         Auth::login($user);

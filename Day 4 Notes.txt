@@ -2,7 +2,7 @@
 2- Polymorph Relation ✅
 3- Carbon, Mutator and Accessor ✅
 
-4- queue & jobs
+4- queue & jobs  ✅
 5- task schedule
 ------------------------
 php artisan storage:link
@@ -33,4 +33,8 @@ if Like comment                     2               App\Models\Comment    6     
 $post->likes()->count();
     
 
+----------------------------------------
+Queue and Jobs
+ 1- create jobs php artisan make:job SendWelcomeEmail
+ 2- 
 
