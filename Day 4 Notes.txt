@@ -3,7 +3,7 @@
 3- Carbon, Mutator and Accessor ✅
 
 4- queue & jobs  ✅
-5- task schedule
+5- task schedule ✅
 ------------------------
 php artisan storage:link
 Storage::url()
@@ -36,5 +36,30 @@ $post->likes()->count();
 ----------------------------------------
 Queue and Jobs
  1- create jobs php artisan make:job SendWelcomeEmail
- 2- 
+
+----------------------------------
+
+lab 4
+----
+sof delete
+uploading image
+morph likes-> (post , comment) OR comment -> (user , post)
+mutator and accessor (formating)
+Custom Rule
+---------------------------------------------------------------
+Post: id, ...
+User: id, ...
+Comment:    commentable_type commentable_id user_id  (commenter)
+Hadeer:2        Post            5             2
+post:5          User            6             2
+
+
+Hadeer:2
+Andrew:6
+
+User.php
+	comments()  morphMany(Comment) 
+	hisCommentes()  hasMany(Comment)
+------------------------------------------------------------------
+
 
