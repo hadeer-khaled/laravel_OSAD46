@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StorePostRequest;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -33,8 +34,31 @@ class PostController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StorePostRequest $request)
     {
+
+        // $validatedArray = $request->validate([
+        //     'title' => 'required|integer|min:5|max:255', //['required' ,'string', 'min:5', 'max:255'],
+        //     'content' => 'required|string|min:10',
+        // ]);
+
+        // Post::create($validatedArray);
+        
+        // Post::create([
+        //     'title' => $validatedArray['title'],
+        //     'content' => $validatedArray['content'],
+        // ]);
+
+        // Post::create($request->only('title', 'content')); 
+
+        //----------------------------------------------------
+
+        $validatedArray = $request->validated();
+        Post::create($validatedArray); // mass assignment
+
+
+        //------------------------------------------------
+
         //store data in database
 
         // Way 1 - Query Builder
@@ -54,10 +78,10 @@ class PostController extends Controller
 
 
         //Way 3 - ORM Eloquent (Mass Assignment)
-        $post = Post::create([
-            'title' => $request['title'],
-            'content' => $request['content'],
-        ]);
+        // $post = Post::create([
+        //     'title' => $request['title'],
+        //     'content' => $request['content'],
+        // ]);
 
         // add password
         // $post->password = bcrypt($request['password']);
