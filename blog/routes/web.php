@@ -35,6 +35,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/posts/{id}' , [PostController::class , 'show'])->name('posts.show')->where('id', '[0-9]+');
     Route::get('/posts/create' , [PostController::class , 'create'])->name('posts.create');
     Route::post('/posts' , [PostController::class , 'store'])->name('posts.store');
+    Route::delete('/posts/{post}' , [PostController::class , 'destroy'])->name('posts.destroy');
 
     // Route::resource('users', UserController::class);
 

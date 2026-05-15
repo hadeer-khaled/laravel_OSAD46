@@ -15,11 +15,16 @@ class PostController extends Controller
     public function index()
     {
         // Way 1 - Query Builder
-        $posts = DB::table('posts')->get();  
+        // $posts = DB::table('posts')->get();  
         // $posts = DB::table('posts')->latest()->get();  // return collection of posts (objects)
 
         //ORM (Eloquent)
-        // $posts = Post::all();
+        $posts = Post::all(); //return all where deleted_at is null (not deleted)
+        // $posts = Post::withTrashed()->get(); // return post even if it is soft deleted
+        // $posts = Post::onlyTrashed()->get(); // return only soft deleted posts
+
+
+
         return view('posts.index', ['posts' => $posts] );
         // return view('posts.index', compact('posts') ); //['posts' => $posts]
     }
@@ -97,19 +102,25 @@ class PostController extends Controller
      */
     public function show(int $id)
     {
+        // Post::find($id)->delete(); // soft delete
 
-        // Way 1 - Query Builder
-        // $post = DB::table('posts')->where('id', $id)->first();  // return single post (object)
-        // $post = DB::table('posts')->find($id);  // return single post (object)
+        $post = Post::withTrashed()->find($id);
+        // $post->restore();
+        Post::destroy($id); // hard delete
+        return redirect()->route('posts.index')->with('success', 'Post deleted successfully');
 
-        // Way 2 - ORM (Eloquent)
-        $post = Post::with('author')->find($id);  // return single post (object)
-        if(!$post) {
-            return 'Post not found';
-        }
-        // return $post;
+        // // Way 1 - Query Builder
+        // // $post = DB::table('posts')->where('id', $id)->first();  // return single post (object)
+        // // $post = DB::table('posts')->find($id);  // return single post (object)
+
+        // // Way 2 - ORM (Eloquent)
+        // $post = Post::with('author')->find($id);  // return single post (object)
+        // if(!$post) {
+        //     return 'Post not found';
+        // }
+        // // return $post;
         
-        return view('posts.show', ['post' => $post] );
+        // return view('posts.show', ['post' => $post] );
 
     }
 
@@ -132,8 +143,9 @@ class PostController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Post $post)
     {
-        //
+        $post->delete();
+        return redirect()->route('posts.index')->with('success', 'Post deleted successfully');
     }
 }

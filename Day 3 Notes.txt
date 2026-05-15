@@ -5,13 +5,12 @@
 -------------------
 5- __() magic function
 5-CSRF
-5- soft delete
 6- polymorph
 7- mutator and accessor
-8- tailwind
 9- custome rule
 10- queue and task schedule
 11- migrate:refresh example
+12- image uploading
 ---------------------------------
 Request Validation
 -------------------
@@ -34,3 +33,22 @@ install breeze => https://laravel.com/docs/11.x/starter-kits#laravel-breeze-inst
 install tailwind => https://tailwindcss.com/docs/installation/framework-guides/laravel/vite
 
 ---------------------------------------
+Laravel laracast => https://www.youtube.com/watch?v=SqTdHCTWqks
+PHP laracast => https://www.youtube.com/watch?v=fw5ObX8P6as
+--------------------------------
+Soft Delete
+--------------
+1- add deleted_at to database (migration file)
+2- 
+
+
+
+
+
+
+
+
+
+
+
+
