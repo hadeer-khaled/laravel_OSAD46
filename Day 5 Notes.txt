@@ -4,3 +4,7 @@
 	- Resource
 2- Laravel Sanctum
 3- Laravel Socialite
+
+---------------------------------
+login -> token (store it in database)
+any other request -> (token + request body)
