@@ -1,0 +1,6 @@
+1- Laravel Apis (posts endpoits)
+	- php artisan install:api
+	- php artisan make:controller Api\PostController --api
+	- Resource
+2- Laravel Sanctum
+3- Laravel Socialite
