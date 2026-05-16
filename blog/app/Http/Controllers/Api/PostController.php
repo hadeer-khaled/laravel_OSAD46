@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\PostDetailsResource;
+use App\Http\Resources\PostsResource;
 use App\Models\Post;
 use Illuminate\Http\Request;
 
@@ -16,10 +17,12 @@ class PostController extends Controller
     {
         $per_page = request()->query('per_page' , 10);
         $posts = Post::with('author')->paginate($per_page);
-        return response()->json([
-            'status' => 'success',
-            'data' => $posts
-        ], 200);
+        // return response()->json([
+        //     'status' => 'success',
+        //     'data' => $posts
+        // ], 200);
+
+        return PostsResource::collection($posts);
     }
 
     /**
