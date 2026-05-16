@@ -7,6 +7,7 @@ use App\Http\Resources\PostDetailsResource;
 use App\Http\Resources\PostsResource;
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -73,6 +74,23 @@ class PostController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $post = Post::find($id);
+
+        if(!$post){
+            return response()->json([
+                "message" => "Post Not Found"
+            ], 404);
+        }
+
+        if($post->image && Storage::exists($post->image)){
+            Storage::delete($post->image);
+            // Storage::disk('public')->delete($post->image);
+        }
+        $post->comments()->delete();
+        $post->forceDelete();
+
+        return response()->json([
+            "message" => "Post deleted"
+        ]);
     }
 }
